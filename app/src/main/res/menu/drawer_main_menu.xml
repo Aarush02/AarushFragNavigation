@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group>
+        <item android:id="@+id/nav_item_wish_list"
+            android:icon="@drawable/ic_baseline_format_list_bulleted_24"
+            android:title="Wishlist" />
+    </group>
+    <group>
+        <item android:id="@+id/nav_item_notification_setting"
+            android:icon="@drawable/ic_baseline_notifications_none_24"
+            android:title="Notification Settings" />
+        <item android:id="@+id/nav_item_privacy_policy"
+            android:icon="@drawable/ic_baseline_security_24"
+            android:title="Privacy Policy" />
+    </group>
+    <item android:title="More">
+        <menu>
+            <item android:id="@+id/nav_item_profile_logout"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+
+</menu>
