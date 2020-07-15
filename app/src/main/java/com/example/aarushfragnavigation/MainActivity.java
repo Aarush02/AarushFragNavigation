@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private TextView textViewProfileName, textViewProfileEmail, textViewEditProfile;
     private ImageView imageViewProfilePicture;
     private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +59,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         } else if (id == R.id.nav_item_privacy_policy) {
             fragment = new NavPrivacyPolicyFrag();
         } else if (id == R.id.nav_item_profile_logout) {
-
+            finish();
+            startActivity(new Intent(MainActivity.this,AarushSignUpActivity.class));
         } else if (id == R.id.action_home){
             fragment = new BottomHomeFrag();
         } else if (id == R.id.action_search){
