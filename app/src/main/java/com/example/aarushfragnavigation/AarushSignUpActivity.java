@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,7 +30,6 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
 
 public class AarushSignUpActivity extends AppCompatActivity implements View.OnClickListener {
-    private Spinner dropdown;
     private EditText editTextPhone;
     private EditText editTextotp;
     private ProgressDialog progressDialog;
@@ -41,14 +41,11 @@ public class AarushSignUpActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aarush_sign_up);
-        dropdown = findViewById(R.id.spinner_country_code);
-        String[] items = new String[]{"+91"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
         editTextPhone = findViewById(R.id.edit_text_phone);
         editTextotp = findViewById(R.id.edit_text_otp);
         mAuth = FirebaseAuth.getInstance();
         buttonSend = findViewById(R.id.button_send);
+        progressDialog = new ProgressDialog(this);
         Intent intent = getIntent();
         String phone = intent.getStringExtra("phone");
         sendVerificationCode(phone);
@@ -58,6 +55,12 @@ public class AarushSignUpActivity extends AppCompatActivity implements View.OnCl
                 if (v.length()==10)
                 {
                     buttonSend.setVisibility(View.VISIBLE);
+                    getPhoneNumber();
+                    return true;
+                }
+                if (v.length()<10)
+                {
+                    buttonSend.setVisibility(View.GONE);
                     return true;
                 }
                 return true;
@@ -72,12 +75,12 @@ public class AarushSignUpActivity extends AppCompatActivity implements View.OnCl
         if(phone.isEmpty() || phone.length() < 10){
             editTextPhone.setError("Enter a valid mobile");
             editTextPhone.requestFocus();
-            return;
         }
+        sendVerificationCode(phone);
     }
     private void sendVerificationCode(String mobile) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                dropdown.toString() + mobile,
+                "+91" + mobile,
                 60,
                 TimeUnit.SECONDS,
                 TaskExecutors.MAIN_THREAD,
@@ -117,6 +120,7 @@ public class AarushSignUpActivity extends AppCompatActivity implements View.OnCl
     };
 
     private void verifyVerificationCode(String otp) {
+        editTextotp.setVisibility(View.VISIBLE);
         String code = editTextotp.getText().toString().trim();
         if (code.isEmpty() || code.length() < 6) {
             editTextotp.setError("Enter valid code");
@@ -132,6 +136,7 @@ public class AarushSignUpActivity extends AppCompatActivity implements View.OnCl
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            progressDialog.dismiss();
                             //verification successful we will start the profile activity
                             Intent intent = new Intent(AarushSignUpActivity.this, MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

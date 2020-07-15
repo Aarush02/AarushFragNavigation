@@ -29,20 +29,14 @@
         android:layout_height="wrap_content"
         android:padding="10sp"
         android:layout_below="@+id/relative_tview"
-        android:layout_marginTop="70dp">
-        <Spinner
-            android:id="@+id/spinner_country_code"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            android:popupBackground="#c7c7c7"/>
+        android:layout_marginTop="70dp"
+        android:gravity="center">
+
 
         <EditText
             android:id="@+id/edit_text_phone"
-            android:layout_width="match_parent"
+            android:layout_width="300sp"
             android:layout_height="45sp"
-            android:layout_toEndOf="@+id/spinner_country_code"
             android:background="@drawable/edit_text"
             android:hint="Enter Phone"
             android:drawableStart="@drawable/ic_baseline_phone_24"
@@ -55,32 +49,11 @@
 
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/relative_btnview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10sp"
-        android:layout_below="@+id/relative_phnview"
-        android:layout_marginTop="20sp"
-        android:gravity="right">
-        <Button
-            android:id="@+id/button_send"
-            android:layout_width="70sp"
-            android:layout_height="70sp"
-            android:drawableStart="@drawable/ic_baseline_send_24"
-            android:background="@drawable/edit_text"
-            android:padding="18sp"
-            android:visibility="gone"/>
-
-
-
-
-    </RelativeLayout>
-    <RelativeLayout
         android:id="@+id/relative_otpview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10sp"
-        android:layout_below="@+id/relative_btnview"
+        android:layout_below="@+id/relative_phnview"
         android:layout_marginTop="20dp"
         android:gravity="center">
 
@@ -98,6 +71,28 @@
 
 
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relative_btnview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:layout_below="@+id/relative_otpview"
+        android:layout_marginTop="20sp"
+        android:gravity="center">
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="70sp"
+            android:layout_height="70sp"
+            android:drawableStart="@drawable/ic_baseline_send_24"
+            android:background="@drawable/edit_text"
+            android:padding="18sp"
+            android:visibility="gone"/>
+
+
+
+
+    </RelativeLayout>
+
 
 
 
